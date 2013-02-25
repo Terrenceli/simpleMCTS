@@ -7,14 +7,14 @@ class RandomPlayer:public Player
 public:
 	RandomPlayer(Game* g, bool player1);
 	~RandomPlayer();
-	GameStatePtr curState;
-	GameStatePtr getCurState();
-	void updateGameState(GameStatePtr s);
+	GameState* curState;
+	GameState* getCurState();
+	void updateGameState(GameState* s);
 	void MakeMove();
 
 private:
 	Game* g;
 	bool player1;
-	GameStatePtr getFinishingMoveFrom(GameStatePtr gameState);
-	GameStatePtr getRandomMoveFrom(GameStatePtr gameState);
+	GameState* getFinishingMoveFrom(GameState* gameState);
+	GameState* getRandomMoveFrom(GameState* gameState);
 };

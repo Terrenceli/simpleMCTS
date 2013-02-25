@@ -17,9 +17,9 @@ ConnectFour::~ConnectFour()
 
 const string replaceAll(const string& source, const string& replaceWhat, const string& replaceWithWhat);
 
-vector<StringGameStatePtr>& ConnectFour::getPossibleMoves( GameStatePtr state )
+vector<StringGameState*>& ConnectFour::getPossibleMoves( GameState* state )
 {
-	static vector<StringGameStatePtr> posMoves;
+	static vector<StringGameState*> posMoves;
 
 	posMoves.clear();
 	posMoves.reserve(100);
@@ -46,7 +46,7 @@ vector<StringGameStatePtr>& ConnectFour::getPossibleMoves( GameStatePtr state )
 					{
 						temp += '1';
 					}
-					posMoves.push_back(StringGameStatePtr(new StringGameState(temp)));
+					posMoves.push_back(new StringGameState(temp));
 					j = -1;
 				}
 			}
@@ -56,7 +56,7 @@ vector<StringGameStatePtr>& ConnectFour::getPossibleMoves( GameStatePtr state )
 	return posMoves;
 }
 
-Game::status ConnectFour::gameStatus( GameStatePtr state )
+Game::status ConnectFour::gameStatus( GameState* state )
 {
 	string s = state->toString().substr(0,state->toString().length()-1);
 	//string sX= replaceAll(state->toString(),"O",".");
@@ -93,12 +93,12 @@ Game::status ConnectFour::gameStatus( GameStatePtr state )
 	}
 }
 
-StringGameStatePtr ConnectFour::getStartingState()
+StringGameState* ConnectFour::getStartingState()
 {
-	return StringGameStatePtr(new StringGameState("_______,_______,_______,_______,_______,_______,1"));
+	return new StringGameState("_______,_______,_______,_______,_______,_______,1");
 }
 
-void ConnectFour::printState( GameStatePtr state )
+void ConnectFour::printState( GameState* state )
 {
 	string s = state->toString();
 	s = replaceAll(s,"1","X");

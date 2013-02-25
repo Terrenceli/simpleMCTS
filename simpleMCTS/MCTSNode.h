@@ -6,30 +6,30 @@
 using namespace std;
 
 class MCTSNode;
-typedef boost::shared_ptr<MCTSNode> MCTSNodePtr;
+//typedef boost::shared_ptr<MCTSNode> MCTSNodePtr;
 
 class MCTSNode
 {
 public:
-	MCTSNode(GameStatePtr nodeGameState);
+	MCTSNode(GameState* nodeGameState);
 	~MCTSNode();
-	void expand(vector<StringGameStatePtr>& possibleMoves);
-	MCTSNodePtr bestSelection(bool myTurn);
+	void expand(vector<StringGameState*>& possibleMoves);
+	MCTSNode* bestSelection(bool myTurn);
 	int getTimesVisited();
-	MCTSNodePtr bestMove();
-	vector<MCTSNodePtr> getNextMoves();
-	GameStatePtr getState();
+	MCTSNode* bestMove();
+	vector<MCTSNode*> getNextMoves();
+	GameState* getState();
 	string toString();
 	void setScore(float score);
 	void visit();
 	float getScore();
-	MCTSNodePtr findChildNode(GameStatePtr s);
+	MCTSNode* findChildNode(GameState* s);
 	bool isLeaf();
-	MCTSNodePtr getRandomChild();
+	MCTSNode* getRandomChild();
 
 private:
-	vector<MCTSNodePtr> nextMoves;
-	GameStatePtr nodeGameState;
+	vector<MCTSNode*> nextMoves;
+	GameState* nodeGameState;
 	float score;
 	int timesVisited;
 	MTRand r;

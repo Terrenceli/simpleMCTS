@@ -8,11 +8,11 @@ class StringGameState:public GameState
 {
 public:
 	StringGameState(string s);
-	bool equal(GameStatePtr g);
+	bool equal(GameState* g);
 	string& toString();
 private:
 	string state;
 
 };
 
-typedef boost::shared_ptr<StringGameState> StringGameStatePtr;
+//typedef boost::shared_ptr<StringGameState> StringGameStatePtr;

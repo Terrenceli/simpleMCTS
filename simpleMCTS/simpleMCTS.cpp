@@ -33,12 +33,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	int p1Wins = 0, p2Wins = 0, draws = 0;
 	clock_t time = clock();
-	int numOfGames=500;
+	int numOfGames=5000;
 	for (int i = 0; i < numOfGames; i++) {
 		//p1 = new RandomRolloutPlayer(g, true, 50);
 		//p1 = new HumanPlayer(g, true);
 		p1 = shared_ptr<Player>(new RandomPlayer(g, true));
-		p2 = shared_ptr<Player>(new RandomRolloutPlayer(g, false, 50));
+		p2 = shared_ptr<Player>(new RandomRolloutPlayer(g, false,30));
 
 		while (g->gameStatus(p2->getCurState()) == Game::status::ONGOING) {
 			//p1 goes
@@ -67,7 +67,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		cout<<"P1 wins: " <<p1Wins << ", P2 wins: "
 			<<p2Wins << ", Draws: " <<draws<<endl;
-
+		delete g;
 	}
 	cout<<"P1 wins: " <<p1Wins << ", P2 wins: "
 		<<p2Wins << ", Draws: " <<draws<<endl;

@@ -12,10 +12,10 @@ public:
 		ONGOING,
 		DRAW
 	};
-	virtual vector<StringGameStatePtr>& getPossibleMoves(GameStatePtr state)=0;
-	virtual status gameStatus(GameStatePtr state)=0;
-	virtual StringGameStatePtr getStartingState()=0;
-	virtual void printState(GameStatePtr state)=0;
+	virtual vector<StringGameState*>& getPossibleMoves(GameState* state)=0;
+	virtual status gameStatus(GameState* state)=0;
+	virtual StringGameState* getStartingState()=0;
+	virtual void printState(GameState* state)=0;
 private:
 
 };

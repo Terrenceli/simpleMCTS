@@ -8,7 +8,7 @@ RandomRolloutPlayer::~RandomRolloutPlayer()
 {
 }
 
-Game::status RandomRolloutPlayer::simulateFrom( GameStatePtr state )
+Game::status RandomRolloutPlayer::simulateFrom( GameState* state )
 {
 	Game::status s=g->gameStatus(state);
 	if (s!=Game::status::ONGOING)
@@ -21,9 +21,9 @@ Game::status RandomRolloutPlayer::simulateFrom( GameStatePtr state )
 	}
 }
 
-StringGameStatePtr RandomRolloutPlayer::getRandomMoveFrom( GameStatePtr gameState )
+StringGameState* RandomRolloutPlayer::getRandomMoveFrom( GameState* gameState )
 {
-	vector<StringGameStatePtr>& moves = g->getPossibleMoves(gameState);
+	vector<StringGameState*>& moves = g->getPossibleMoves(gameState);
 	int r = rand() % moves.size();
 	return moves[r];
 }

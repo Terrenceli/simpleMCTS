@@ -5,7 +5,7 @@ MCTSPlayer::MCTSPlayer(Game* g, bool player1, int thinkTime)
 	this->g=g;
 	this->player1=player1;
 	curState=g->getStartingState();
-	gameTree=MCTSNodePtr(new MCTSNode(curState));
+	gameTree=new MCTSNode(curState);
 	curNode=gameTree;
 	curNode->expand(g->getPossibleMoves(curNode->getState()));
 	this->thinkTime=thinkTime;
@@ -16,13 +16,13 @@ MCTSPlayer::~MCTSPlayer()
 {
 }
 
-GameStatePtr MCTSPlayer::getCurState()
+GameState* MCTSPlayer::getCurState()
 {
 	return curState;
 
 }
 
-void MCTSPlayer::updateGameState( GameStatePtr s )
+void MCTSPlayer::updateGameState( GameState* s )
 {
 	curState=s;
 	if(curNode->isLeaf())
@@ -34,6 +34,7 @@ void MCTSPlayer::updateGameState( GameStatePtr s )
 
 void MCTSPlayer::MakeMove()
 {
+	
 	clock_t time = clock();
 	clock_t endTime = time+thinkTime;
 	while (clock() < endTime)
@@ -42,7 +43,7 @@ void MCTSPlayer::MakeMove()
 	}
 	if (g->gameStatus(curState)==Game::status::ONGOING)
 	{
-		MCTSNodePtr best=curNode->bestMove();
+		MCTSNode* best=curNode->bestMove();
 		curState = best->getState();
 		curNode = best;
 	}
@@ -64,7 +65,7 @@ void MCTSPlayer::MakeMove()
 	*/
 }
 
-Game::status MCTSPlayer::runTrial( MCTSNodePtr node, bool myTurn )
+Game::status MCTSPlayer::runTrial( MCTSNode* node, bool myTurn )
 {
 	Game::status returnStatus;
 	node->visit();
@@ -76,7 +77,7 @@ Game::status MCTSPlayer::runTrial( MCTSNodePtr node, bool myTurn )
 	else
 	{
 		//expansion
-		vector<StringGameStatePtr>& a = g->getPossibleMoves(node->getState());
+		vector<StringGameState*>& a = g->getPossibleMoves(node->getState());
 		
 		node->expand(a);
 		

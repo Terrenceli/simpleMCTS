@@ -12,12 +12,12 @@ RandomPlayer::~RandomPlayer()
 
 }
 
-GameStatePtr RandomPlayer::getCurState()
+GameState* RandomPlayer::getCurState()
 {
 	return curState;
 }
 
-void RandomPlayer::updateGameState( GameStatePtr s )
+void RandomPlayer::updateGameState( GameState* s )
 {
 	curState=s;
 }
@@ -26,7 +26,7 @@ void RandomPlayer::MakeMove()
 {
 	if (g->gameStatus(curState)==Game::status::ONGOING)
 	{
-		GameStatePtr finisher=getFinishingMoveFrom(curState);
+		GameState* finisher=getFinishingMoveFrom(curState);
 		if (finisher==NULL)
 		{
 			curState=getRandomMoveFrom(curState);
@@ -48,9 +48,9 @@ void RandomPlayer::MakeMove()
 //	g->printState(curState);
 }
 
-GameStatePtr RandomPlayer::getFinishingMoveFrom( GameStatePtr gameState )
+GameState* RandomPlayer::getFinishingMoveFrom( GameState* gameState )
 {
-	vector<StringGameStatePtr >& moves=g->getPossibleMoves(gameState);
+	vector<StringGameState* >& moves=g->getPossibleMoves(gameState);
 	for(auto it=moves.begin();it!=moves.end();++it)
 	{
 		if ((g->gameStatus((*it))==Game::status::PLAYER1WIN)||
@@ -62,9 +62,9 @@ GameStatePtr RandomPlayer::getFinishingMoveFrom( GameStatePtr gameState )
 	return NULL;
 }
 
-GameStatePtr RandomPlayer::getRandomMoveFrom( GameStatePtr gameState )
+GameState* RandomPlayer::getRandomMoveFrom( GameState* gameState )
 {
-	vector<StringGameStatePtr >& moves=g->getPossibleMoves(gameState);
+	vector<StringGameState* >& moves=g->getPossibleMoves(gameState);
 	int random=rand()%moves.size();
 	return moves[random];
 }

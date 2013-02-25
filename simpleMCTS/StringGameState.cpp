@@ -5,9 +5,9 @@ StringGameState::StringGameState(string s)
 	state=s;
 }
 
-bool StringGameState::equal(GameStatePtr g)
+bool StringGameState::equal(GameState* g)
 {
-	StringGameState* sun = dynamic_cast<StringGameState*>(g.get());
+	StringGameState* sun = dynamic_cast<StringGameState*>(g);
 	if (sun){
 		return state == sun->state;
 	}

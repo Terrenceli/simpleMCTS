@@ -7,9 +7,9 @@ public:
 	RandomRolloutPlayer(Game* g, bool player1, int thinkTime);
 	~RandomRolloutPlayer();
 protected:
-	Game::status simulateFrom(GameStatePtr state);
+	Game::status simulateFrom(GameState* state);
 private:
-	StringGameStatePtr getRandomMoveFrom(GameStatePtr gameState);
+	StringGameState* getRandomMoveFrom(GameState* gameState);
 
 };
 

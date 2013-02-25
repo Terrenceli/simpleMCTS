@@ -7,20 +7,20 @@ class MCTSPlayer:public Player
 public:
 	MCTSPlayer(Game* g, bool player1, int thinkTime);
 	~MCTSPlayer();
-	GameStatePtr getCurState();
-	void updateGameState(GameStatePtr s);
+	GameState* getCurState();
+	void updateGameState(GameState* s);
 	void MakeMove();
 private:
-	MCTSNodePtr gameTree;
-	MCTSNodePtr curNode;
+	MCTSNode* gameTree;
+	MCTSNode* curNode;
 	int thinkTime;
-	Game::status runTrial(MCTSNodePtr node, bool myTurn);
+	Game::status runTrial(MCTSNode* node, bool myTurn);
 
 protected:
 	Game* g;
 	bool player1;
-	GameStatePtr curState;
+	GameState* curState;
 	bool IWin(Game::status s);
 	bool ILose(Game::status s);
-	virtual Game::status simulateFrom(GameStatePtr state)=0;
+	virtual Game::status simulateFrom(GameState* state)=0;
 };
