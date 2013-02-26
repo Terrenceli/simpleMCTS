@@ -55,7 +55,15 @@ vector<StringGameStatePtr>& ConnectFour::getPossibleMoves( GameStatePtr state )
 	}
 	return posMoves;
 }
+sregex static sre11 = sregex::compile(".*1111.*");
+sregex static sre12 = sregex::compile(".*(1.......){3}1.*");
+sregex static sre13 = sregex::compile(".*(1[^,].......){3}1.*");
+sregex static sre14 = sregex::compile(".*([^,]1.....){3}.1.*");
 
+sregex static sre21 = sregex::compile(".*2222.*");
+sregex static sre22 = sregex::compile(".*(2.......){3}2.*");
+sregex static sre23 = sregex::compile(".*(2[^,].......){3}2.*");
+sregex static sre24 = sregex::compile(".*([^,]2.....){3}.2.*");
 Game::status ConnectFour::gameStatus( GameStatePtr state )
 {
 	numOfStateCount++;
@@ -68,20 +76,20 @@ Game::status ConnectFour::gameStatus( GameStatePtr state )
 // 	string sO= replaceAll(s,"X",".");
 // 	sO=replaceAll(sO,"_",".");
 
+	
 
-
-	if (regex_match(s,regex(".*1111.*"))
-		||regex_match(s,regex(".*(1.......){3}1.*"))
-		||regex_match(s,regex(".*(1[^,].......){3}1.*"))
-		||regex_match(s,regex(".*([^,]1.....){3}.1.*")))
+	if   (regex_match(s,sre11)
+		||regex_match(s,sre12)
+		||regex_match(s,sre13)
+		||regex_match(s,sre14))
 	{
 		return Game::status::PLAYER1WIN;
 	} 
 
-	else if (regex_match(s,regex(".*2222.*"))
-		||regex_match(s,regex(".*(2.......){3}2.*"))
-		||regex_match(s,regex(".*(2[^,].......){3}2.*"))
-		||regex_match(s,regex(".*([^,]2.....){3}.2.*")))
+	else if  (regex_match(s,sre21)
+		||regex_match(s,sre22)
+		||regex_match(s,sre23)
+		||regex_match(s,sre24))
 	{
 		return Game::status::PLAYER2WIN;
 	} 

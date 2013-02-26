@@ -17,7 +17,7 @@
 #include "RandomPlayer.h"
 #include "boost/shared_ptr.hpp"
 #include "ConnectFour.h"
-#include "boost/regex.hpp"
+//#include "boost/regex.hpp"
 
 
 #include <stdio.h>
@@ -28,8 +28,9 @@
 #include <iostream>
 #include <list>
 #include <cmath>
+#include <boost/xpressive/xpressive.hpp>
 
 
 using namespace std;
-
+using namespace boost::xpressive;
 // TODO: reference additional headers your program requires here

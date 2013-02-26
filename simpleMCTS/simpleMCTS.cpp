@@ -39,7 +39,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		//p1 = new RandomRolloutPlayer(g, true, 50);
 		//p1 = new HumanPlayer(g, true);
 		p1 = shared_ptr<Player>(new RandomPlayer(g, true));
-		p2 = shared_ptr<Player>(new RandomRolloutPlayer(g, false, 50));
+		p2 = shared_ptr<Player>(new RandomRolloutPlayer(g, false, 100));
 
 		while (g->gameStatus(p2->getCurState()) == Game::status::ONGOING) {
 			//p1 goes
