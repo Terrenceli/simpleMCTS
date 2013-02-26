@@ -27,9 +27,9 @@ const string replaceAll(const string& source, const string& replaceWhat, const s
 	return result;
 }
 
-vector<StringGameState*>& TicTacToe::getPossibleMoves(GameState* state)
+vector<StringGameStatePtr>& TicTacToe::getPossibleMoves(GameStatePtr state)
 {
-	static vector<StringGameState*> posMoves;
+	static vector<StringGameStatePtr> posMoves;
 // 	for(int i = 0; i < posMoves.size(); i++) {
 // 		delete posMoves[i];
 // 		posMoves[i] = NULL;
@@ -82,7 +82,7 @@ vector<StringGameState*>& TicTacToe::getPossibleMoves(GameState* state)
 				{
 					temp += 'X';
 				}
-				posMoves.push_back(new StringGameState(temp));
+				posMoves.push_back(StringGameStatePtr(new StringGameState(temp)));
 			}
 		}
 		//cout<<"possible moves: "<<posMoves.size()<<endl;
@@ -91,7 +91,7 @@ vector<StringGameState*>& TicTacToe::getPossibleMoves(GameState* state)
 	return posMoves;
 }
 
-Game::status TicTacToe::gameStatus(GameState* state)
+Game::status TicTacToe::gameStatus(GameStatePtr state)
 {
 	string s = state->toString();
 	s[9]='.';
@@ -151,12 +151,12 @@ Game::status TicTacToe::gameStatus(GameState* state)
 	}
 }
 
-StringGameState* TicTacToe::getStartingState()
+StringGameStatePtr TicTacToe::getStartingState()
 {
-    return new StringGameState("_________X");
+    return StringGameStatePtr(new StringGameState("_________X"));
 }
 
-void TicTacToe::printState(GameState* state)
+void TicTacToe::printState(GameStatePtr state)
 {
 	cout<<state->toString().substr(0, 3)<<endl;
 	cout<<state->toString().substr(3, 3)<<endl;

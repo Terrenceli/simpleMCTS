@@ -7,7 +7,7 @@ const int ROWS=6;
 
 ConnectFour::ConnectFour()
 {
-
+	numOfStateCount=0;
 }
 
 ConnectFour::~ConnectFour()
@@ -17,9 +17,9 @@ ConnectFour::~ConnectFour()
 
 const string replaceAll(const string& source, const string& replaceWhat, const string& replaceWithWhat);
 
-vector<StringGameState*>& ConnectFour::getPossibleMoves( GameState* state )
+vector<StringGameStatePtr>& ConnectFour::getPossibleMoves( GameStatePtr state )
 {
-	static vector<StringGameState*> posMoves;
+	static vector<StringGameStatePtr> posMoves;
 
 	posMoves.clear();
 	posMoves.reserve(100);
@@ -46,7 +46,7 @@ vector<StringGameState*>& ConnectFour::getPossibleMoves( GameState* state )
 					{
 						temp += '1';
 					}
-					posMoves.push_back(new StringGameState(temp));
+					posMoves.push_back(StringGameStatePtr(new StringGameState(temp)));
 					j = -1;
 				}
 			}
@@ -56,8 +56,10 @@ vector<StringGameState*>& ConnectFour::getPossibleMoves( GameState* state )
 	return posMoves;
 }
 
-Game::status ConnectFour::gameStatus( GameState* state )
+Game::status ConnectFour::gameStatus( GameStatePtr state )
 {
+	numOfStateCount++;
+	
 	string s = state->toString().substr(0,state->toString().length()-1);
 	//string sX= replaceAll(state->toString(),"O",".");
 // 	string sX= replaceAll(s,"O",".");
@@ -93,12 +95,12 @@ Game::status ConnectFour::gameStatus( GameState* state )
 	}
 }
 
-StringGameState* ConnectFour::getStartingState()
+StringGameStatePtr ConnectFour::getStartingState()
 {
-	return new StringGameState("_______,_______,_______,_______,_______,_______,1");
+	return StringGameStatePtr(new StringGameState("_______,_______,_______,_______,_______,_______,1"));
 }
 
-void ConnectFour::printState( GameState* state )
+void ConnectFour::printState( GameStatePtr state )
 {
 	string s = state->toString();
 	s = replaceAll(s,"1","X");
@@ -114,6 +116,12 @@ void ConnectFour::printState( GameState* state )
 		beg++;
 	}
 }
+
+long ConnectFour::getNumOfStateCount()
+{
+	return numOfStateCount;
+}
+
 
 Player* ConnectFour::p2 = 0;
 Player* ConnectFour::p1 = 0;

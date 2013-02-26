@@ -9,10 +9,10 @@ class TicTacToe: public Game
 public:
 	TicTacToe();
 	~TicTacToe();
-	vector<StringGameState*>& getPossibleMoves(GameState* state);
-	status gameStatus(GameState* state);
-	StringGameState* getStartingState();
-	void printState(GameState* state);
+	vector<StringGameStatePtr>& getPossibleMoves(GameStatePtr state);
+	status gameStatus(GameStatePtr state);
+	StringGameStatePtr getStartingState();
+	void printState(GameStatePtr state);
 private:
 
 };

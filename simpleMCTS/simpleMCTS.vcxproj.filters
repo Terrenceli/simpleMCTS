@@ -60,9 +60,6 @@
     <ClInclude Include="ConnectFour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateRecorder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

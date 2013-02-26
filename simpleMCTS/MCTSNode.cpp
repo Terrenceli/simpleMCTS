@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-MCTSNode::MCTSNode(GameState* nodeGameState)
+MCTSNode::MCTSNode(GameStatePtr nodeGameState)
 {
 	score=0.0;
 	timesVisited=0;
@@ -11,15 +11,15 @@ MCTSNode::~MCTSNode()
 {
 }
 
-void MCTSNode::expand(vector<StringGameState*>& possibleMoves)
+void MCTSNode::expand(vector<StringGameStatePtr>& possibleMoves)
 {
 	for(auto it=possibleMoves.begin(); it!=possibleMoves.end();++it)
 	{
-		nextMoves.push_back(new MCTSNode(*it));
+		nextMoves.push_back(MCTSNodePtr(new MCTSNode(*it)));
 	}
 }
 
-MCTSNode* MCTSNode::bestSelection(bool myTurn)
+MCTSNodePtr MCTSNode::bestSelection(bool myTurn)
 {
 	int turn;
 	if(myTurn)
@@ -36,7 +36,7 @@ MCTSNode* MCTSNode::bestSelection(bool myTurn)
 	float C = 1;
 	for (unsigned i = 0; i < nextMoves.size(); i++) 
 	{
-		MCTSNode* node = nextMoves[i];
+		MCTSNodePtr node = nextMoves[i];
 		float nodeScore = (float) node->getScore() / ((float) (node->getTimesVisited() + FLT_MIN));
 		bias = 2 * C * (float) (sqrt(log((float) this->getTimesVisited()) / ((float) node->getTimesVisited() + FLT_MIN)));
 		randomizer = FLT_MIN * (rand() % nextMoves.size()) * nextMoves.size();
@@ -55,14 +55,14 @@ int MCTSNode::getTimesVisited()
 	return timesVisited;
 }
 
-MCTSNode* MCTSNode::bestMove()
+MCTSNodePtr MCTSNode::bestMove()
 {
 	float max=-FLT_MAX;
 	int maxIndex=rand()%nextMoves.size();
 	float randomizer;
 	for (unsigned i = 0; i < nextMoves.size(); i++)
 	{
-		MCTSNode* node=nextMoves[i];
+		MCTSNodePtr node=nextMoves[i];
 		float nodeScore=(float) node->getScore() / (float) (node->getTimesVisited());
 		randomizer=FLT_MIN* (rand()% nextMoves.size()) * nextMoves.size();
 
@@ -74,12 +74,12 @@ MCTSNode* MCTSNode::bestMove()
 	return nextMoves[maxIndex];
 }
 
-vector<MCTSNode*> MCTSNode::getNextMoves()
+vector<MCTSNodePtr> MCTSNode::getNextMoves()
 {
 	return nextMoves;
 }
 
-GameState* MCTSNode::getState()
+GameStatePtr MCTSNode::getState()
 {
 	return nodeGameState;
 }
@@ -104,11 +104,11 @@ float MCTSNode::getScore()
 	return this->score;
 }
 
-MCTSNode* MCTSNode::findChildNode(GameState* s)
+MCTSNodePtr MCTSNode::findChildNode(GameStatePtr s)
 {
 	for(auto it=nextMoves.begin();it!=nextMoves.end();it++)
 	{
-		GameState* st = (*it)->getState();
+		GameStatePtr st = (*it)->getState();
 		if(st->equal(s))
 		{
 			return *it;
@@ -122,7 +122,7 @@ bool MCTSNode::isLeaf()
 	return nextMoves.empty();
 }
 
-MCTSNode* MCTSNode::getRandomChild()
+MCTSNodePtr MCTSNode::getRandomChild()
 {
 	int random=rand()% nextMoves.size();
 	return nextMoves[random];

@@ -17,6 +17,8 @@
 #include "RandomPlayer.h"
 #include "boost/shared_ptr.hpp"
 #include "ConnectFour.h"
+#include "boost/regex.hpp"
+
 
 #include <stdio.h>
 #include <ctime>
@@ -26,7 +28,6 @@
 #include <iostream>
 #include <list>
 #include <cmath>
-#include <regex>
 
 
 using namespace std;

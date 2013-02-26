@@ -13,10 +13,10 @@ private:
 	double totValue;
 	double nVisits;
 	TreeNode* select();
-	GameState* nodeGameState;
+	GameStatePtr nodeGameState;
 public:
 	TreeNode();
-	TreeNode(GameState* g);
+	TreeNode(GameStatePtr g);
 	void selectAction();
 	void expand();
 	bool isLeaf();
